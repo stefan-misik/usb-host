@@ -1,0 +1,8 @@
+# Bind on add (exclude hubs: class 09)
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ACTION=="add", KERNEL=="1-1.1", ATTRS{bDeviceClass}!="09", \
+  RUN+="/usr/sbin/usbip bind -b %k"
+
+# Unbind on remove
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ACTION=="remove", KERNEL=="1-1.1", ATTRS{bDeviceClass}!="09", \
+  RUN+="/usr/sbin/usbip unbind -b %k"
+
